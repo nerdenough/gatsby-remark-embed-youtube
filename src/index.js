@@ -1,7 +1,7 @@
 'use strict'
 const visit = require(`unist-util-visit`)
 
-module.exports = ({ markdownAST }, options = { width: 600, height: 300 }) => {
+module.exports = ({ markdownAST }, options = { className: 'yt-video', width: 600, height: 300 }) => {
   function isUrlValid(userInput) {
     var res = userInput.match(
       /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
@@ -17,7 +17,7 @@ module.exports = ({ markdownAST }, options = { width: 600, height: 300 }) => {
 
       if (isUrlValid(videoUrl)) {
         node.type = `html`
-        node.value = `<div><iframe src="${videoUrl}" width="${options.width}" height="${options.height}"></iframe></div>`
+        node.value = `<div class="${className}"><iframe src="${videoUrl}" width="${options.width}" height="${options.height}"></iframe></div>`
       }
     }
   })
